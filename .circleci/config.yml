@@ -1,0 +1,43 @@
+version: 2.1
+
+commands:
+  common-config:
+    parameters:
+      macos:
+        type: boolean
+        default: false
+    steps:
+      - checkout
+      - restore_cache:
+          key: 'yarn-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}-{{ arch }}'
+      - restore_cache:
+          key: 'node-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}-{{ arch }}'
+      - run:
+          name: 'Configure git'
+          command: 'git config --global user.email "$GITHUB_EMAIL" && git config --global user.name "$GITHUB_USER"'
+      - run:
+          name: 'Install dependencies'
+          command: 'yarn install --network-concurrency 1'
+      - save_cache:
+          key: 'yarn-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}-{{ arch }}'
+          paths:
+            - ~/.cache/yarn
+      - save_cache:
+          key: 'node-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}-{{ arch }}'
+          paths:
+            - node_modules
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:14
+    parameters:
+      macos:
+        type: boolean
+        default: false
+    resource_class: small
+    steps:
+      - common-config
+      - run:
+          name: 'Jest tests and send report to codecov'
+          command: 'yarn run test:ci && yarn send:codecov:report'
