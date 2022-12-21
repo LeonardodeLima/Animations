@@ -1,0 +1,57 @@
+name: iOS
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: macos-12
+    timeout-minutes: 60
+
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_14.0.1.app
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+
+      - name: Rebuild detox
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: yarn detox clean-framework-cache && yarn detox build-framework-cache
+
+      - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install
+
+      
+      - name: Cache Pods
+        uses: actions/cache@v1
+        id: podcache
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          estore-keys: |
+            ${{ runner.os }}-pods-
+
+      - uses: futureware-tech/simulator-action@v2
+        with:
+          model: 'iPhone 12 Pro'
+          # os_version: '>=15.0'
+          
+
+      - name: Update Pods
+        run: |
+          gem update cocoapods xcodeproj
+          cd ios && pod install && cd ..
+      - run: brew tap wix/brew
+      - run: brew install applesimutils
+      - run: brew install xcbeautify
+      - run: yarn e2e:ios:build:release
+      - run: yarn e2e:ios:test:release
