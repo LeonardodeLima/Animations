@@ -45,11 +45,21 @@ module.exports = {
         shouldTakeAutomaticSnapshots: true,
         takeWhen: {
           appNotReady: true,
-          testDone: true,
-          testStart: true,
+          testDone: false,
+          testFailure: true,
+          testStart: false,
         },
       },
-      uiHierarchy: 'enabled',
+      video: {
+        enabled: true,
+        keepOnlyFailedTestsArtifacts: true,
+        android: {
+          bitRate: 100000
+        },
+        simulator: {
+          "codec": "hevc"
+        }
+      },
     },
   },
   behavior: {

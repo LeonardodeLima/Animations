@@ -1,4 +1,4 @@
-name: Android
+name: Android E2E
 
 on: [push, pull_request]
 
@@ -68,9 +68,9 @@ jobs:
       - name: Android Detox
         run: yarn e2e:android:test:release --  --loglevel verbose
 
-      # - name: Archive Detox artifacts on test failure
-      #   uses: actions/upload-artifact@v3
-      #   if: failure()
-      #   with:
-      #     name: detox-artifacts
-      #     path: artifacts # Default path for Detox artifacts
+      - name: Archive Detox artifacts on test failure
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: detox-artifacts
+          path: artifacts
