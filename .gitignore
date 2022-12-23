@@ -80,3 +80,6 @@ coverage/
 
 # cache
 .eslintcache
+
+# e2e artifacts
+artifacts/
