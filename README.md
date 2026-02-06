@@ -11,7 +11,7 @@ Repositório dedicado ao estudo e implementação de animações avançadas em *
 
 ---
 
-## 🛠️ Tecnologias Principais
+##  Tecnologias Principais
 
 * **React Native** - Framework para desenvolvimento mobile.
 * **TypeScript** - Tipagem estática para maior segurança no desenvolvimento.
@@ -21,7 +21,7 @@ Repositório dedicado ao estudo e implementação de animações avançadas em *
 
 ---
 
-## 🚀 Funcionalidades e Experimentos
+##  Funcionalidades e Experimentos
 
 * **UI Interactions:** Micro-interações em componentes de interface.
 * **Gestures:** Manipulação de eventos de toque e gestos complexos.
@@ -30,7 +30,7 @@ Repositório dedicado ao estudo e implementação de animações avançadas em *
 
 ---
 
-## 📂 Estrutura de Pastas
+##  Estrutura de Pastas
 
 ```text
 Animations/
@@ -49,7 +49,7 @@ Animations/
  └── tsconfig.json        # Configurações do TypeScript
 ```
 
-## 📦 Como Rodar o Projeto
+##  Como Rodar o Projeto
 
 1. **Clone o repositório:**
 
@@ -72,8 +72,6 @@ cd ios && pod install && cd ..
 yarn android # para Android
 yarn ios     # para iOS
 ```
-
-##🧪 Testes
 
 ### Para rodar os testes E2E com Detox:
 ```Bash
