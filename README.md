@@ -1,4 +1,4 @@
-# <p align="center"><img src="https://github.com/user-attachments/assets/7b6e4725-5c1e-46b8-8f26-f31ddbaf3780" alt="Animations" width="600" height="600"/></p>
+# <p align="center"><img src="https://github.com/user-attachments/assets/7b6e4725-5c1e-46b8-8f26-f31ddbaf3780" alt="Animations" width="660" height="600"/></p>
 # <p align="center">Animations</p>
 
 <p align="center">
@@ -54,7 +54,7 @@ Animations/
 1. **Clone o repositório:**
 
 ```Bash
-git clone [https://github.com/LeonardodeLima/Animations.git](https://github.com/LeonardodeLima/Animations.git)
+git clone https://github.com/LeonardodeLima/Animations.git
 ```
 
 2. **Instale as dependências:**
